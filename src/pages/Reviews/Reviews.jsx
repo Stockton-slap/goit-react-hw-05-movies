@@ -1,4 +1,11 @@
-import fetchMovieReviews from 'fetchMovieReviews';
+import fetchMovieReviews from 'fetchRequests/fetchMovieReviews';
+import {
+  ReviewsList,
+  ReviewsItem,
+  ReviewAuthor,
+  ReviewAuthorContent,
+} from './Reviews.styled';
+
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -15,16 +22,16 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <ul>
+    <ReviewsList>
       {reviews.map(({ id, author, content }) => {
         return (
-          <li key={id}>
-            <h1>{author}</h1>
-            <p>{content}</p>
-          </li>
+          <ReviewsItem key={id}>
+            <ReviewAuthor>Author: {author}</ReviewAuthor>
+            <ReviewAuthorContent>{content}</ReviewAuthorContent>
+          </ReviewsItem>
         );
       })}
-    </ul>
+    </ReviewsList>
   );
 };
 

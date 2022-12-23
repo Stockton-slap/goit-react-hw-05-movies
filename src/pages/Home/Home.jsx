@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import fetchTradingMovies from 'fetchTradingMovies';
-
+import fetchTradingMovies from 'fetchRequests/fetchTradingMovies';
 import { HomeTitle, MovieLinkTitle, MovieList, MovieItem } from './Home.styled';
 
 const Home = () => {
@@ -35,5 +34,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// {`${product.id}`}

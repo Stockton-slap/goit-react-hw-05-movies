@@ -4,8 +4,8 @@ import SharedLayout from './SharedLayout';
 import Home from 'pages/Home';
 import Movies from 'pages/Movies';
 import MovieDetails from 'pages/MovieDetails';
-import Cast from 'pages/Cast/Cast';
-import Reviews from 'pages/Reviews/Reviews';
+import Cast from 'pages/Cast';
+import Reviews from 'pages/Reviews';
 
 export const App = () => {
   return (
