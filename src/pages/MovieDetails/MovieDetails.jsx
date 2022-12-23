@@ -52,7 +52,7 @@ const MovieDetails = () => {
   const {
     title,
     overview,
-    genres,
+    // genres,
     id,
     poster_path,
     vote_average,
