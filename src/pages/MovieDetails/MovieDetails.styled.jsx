@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const MovieContainer = styled.div``;
 
+export const ReturnButton = styled.button``;
+
 export const MovieInfoContainer = styled.div`
   display: flex;
   border-bottom: 2px solid grey;
@@ -51,6 +53,8 @@ export const DetailsInfoList = styled.ul`
 `;
 
 export const DetailsInfoItem = styled.li`
+  text-decoration: none;
+
   &:not(:last-child) {
     padding-bottom: 10px;
   }

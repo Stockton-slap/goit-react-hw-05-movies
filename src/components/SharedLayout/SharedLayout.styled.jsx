@@ -9,6 +9,7 @@ export const Container = styled.div`
 
 export const StyledNavLink = styled(NavLink)`
   color: #000;
+  text-decoration: none;
 
   &.active {
     color: #b73a3a;
