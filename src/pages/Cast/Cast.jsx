@@ -1,11 +1,6 @@
 import fetchMovieCast from 'fetchRequests/fetchMovieCast';
-import {
-  CastList,
-  CastItem,
-  ActorPic,
-  ActorName,
-  MovieCharacter,
-} from './Cast.styled';
+import { CastList } from './Cast.styled';
+import CastItem from 'components/CastItem/CastItem';
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -21,18 +16,8 @@ const Cast = () => {
   console.log(cast);
   return (
     <CastList>
-      {cast.map(({ character, name, profile_path, cast_id }) => {
-        return (
-          <CastItem key={cast_id}>
-            <ActorPic
-              src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
-              alt={name}
-              width="200"
-            />
-            <ActorName>{name}</ActorName>
-            <MovieCharacter>Character: {character}</MovieCharacter>
-          </CastItem>
-        );
+      {cast.map(actor => {
+        return <CastItem actor={actor} key={actor.cast_id} />;
       })}
     </CastList>
   );

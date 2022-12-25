@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 
 import fetchTradingMovies from 'fetchRequests/fetchTradingMovies';
-import { HomeTitle, MovieLinkTitle, MovieList, MovieItem } from './Home.styled';
+
+import { HomeTitle, MovieList } from './Home.styled';
+
+import TrendMovieItem from 'components/TrendMovieItem/TrendMovieItem';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -24,9 +27,7 @@ const Home = () => {
       <HomeTitle>Trending today</HomeTitle>
       <MovieList>
         {movies.map(({ title, id }) => (
-          <MovieItem key={id}>
-            <MovieLinkTitle to={`/movies/${id}`}>{title}</MovieLinkTitle>
-          </MovieItem>
+          <TrendMovieItem key={id} title={title} id={id} />
         ))}
       </MovieList>
     </div>

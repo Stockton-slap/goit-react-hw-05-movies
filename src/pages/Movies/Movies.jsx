@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import fetchMovieByKeyWord from 'fetchRequests/fetchMovieByKeyWord';
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import MovieList from 'components/MovieList/MovieList';
+import Filter from 'components/Filter/Filter';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -8,8 +10,6 @@ const Movies = () => {
 
   const [inputValue, setInputValue] = useState(query || '');
   const [results, setResults] = useState([]);
-
-  const location = useLocation();
 
   useEffect(() => {
     if (!query) {
@@ -28,7 +28,6 @@ const Movies = () => {
 
     if (inputValue === '') {
       setResults([]);
-
       setSearchParams();
     } else {
       setSearchParams({ query: inputValue });
@@ -37,21 +36,12 @@ const Movies = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input type="input" value={inputValue} onChange={handleChange} />
-        <button type="submit">Search</button>
-      </form>
-      <ul>
-        {results.map(({ id, title }) => {
-          return (
-            <li key={id}>
-              <Link to={`/movies/${id}`} state={{ from: location }}>
-                {title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <Filter
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        inputValue={inputValue}
+      />
+      <MovieList results={results} />
     </div>
   );
 };

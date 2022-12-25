@@ -1,10 +1,7 @@
 import fetchMovieReviews from 'fetchRequests/fetchMovieReviews';
-import {
-  ReviewsList,
-  ReviewsItem,
-  ReviewAuthor,
-  ReviewAuthorContent,
-} from './Reviews.styled';
+import { ReviewsList } from './Reviews.styled';
+
+import ReviewItem from 'components/ReviewItem/ReviewItem';
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -16,20 +13,14 @@ const Reviews = () => {
 
   useEffect(() => {
     fetchMovieReviews(movieId).then(({ results }) => {
-      console.log(results);
       return setReviews(results);
     });
   }, [movieId]);
 
   return (
     <ReviewsList>
-      {reviews.map(({ id, author, content }) => {
-        return (
-          <ReviewsItem key={id}>
-            <ReviewAuthor>Author: {author}</ReviewAuthor>
-            <ReviewAuthorContent>{content}</ReviewAuthorContent>
-          </ReviewsItem>
-        );
+      {reviews.map(review => {
+        return <ReviewItem review={review} key={review.id} />;
       })}
     </ReviewsList>
   );
