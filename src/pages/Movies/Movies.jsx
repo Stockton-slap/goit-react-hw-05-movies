@@ -19,7 +19,9 @@ const Movies = () => {
       return;
     }
 
-    fetchMovieByKeyWord(query).then(({ results }) => setResults(results));
+    fetchMovieByKeyWord(query).then(({ results }) => {
+      return setResults(results);
+    });
   }, [query]);
 
   const handleChange = e => {
@@ -44,7 +46,8 @@ const Movies = () => {
         handleChange={handleChange}
         inputValue={inputValue}
       />
-      {results.length < 1 ? <Notification /> : <MovieList results={results} />}
+      {results.length === 0 && <Notification />}
+      <MovieList results={results} />
     </div>
   );
 };

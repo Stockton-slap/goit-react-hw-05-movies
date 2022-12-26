@@ -1,13 +1,21 @@
 import axios from 'axios';
 
+import requestData from 'base';
+
+const { BASE_URL, API_KEY } = requestData;
+
 async function fetchMovieReviews(movieId) {
-  const response = await axios.get(
-    `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=f23afa13cf10e0a13fa8c4a5195ece8b&language=en-US&page=1`
-  );
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/3/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`
+    );
 
-  const data = response.data;
+    const data = response.data;
 
-  return data;
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export default fetchMovieReviews;
