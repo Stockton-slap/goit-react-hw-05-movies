@@ -1,14 +1,12 @@
-import fetchMovieById from 'fetchRequests/fetchMovieById';
-import { MovieContainer } from './MovieDetails.styled';
-
-import MovieInfoContainer from 'components/MovieInfoContainer/MovieInfoContainer';
-import AdditionalInfo from 'components/AdditionalInfo/AdditionalInfo';
-import ReturnButton from 'components/ReturnButton/ReturnButton';
-
-import Loader from 'components/Loader/Loader';
-
-import { useParams, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useParams, Outlet } from 'react-router-dom';
+
+import MovieInfoContainer from 'components/MovieInfoContainer';
+import AdditionalInfo from 'components/AdditionalInfo';
+import ReturnButton from 'components/ReturnButton';
+import Loader from 'components/Loader';
+
+import fetchMovieById from 'fetchRequests/fetchMovieById';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -38,7 +36,7 @@ const MovieDetails = () => {
           });
         }
       )
-      .catch(error => console.log(error));
+      .catch(error => error);
   }, [movieId]);
 
   if (movie === null) {
@@ -46,12 +44,12 @@ const MovieDetails = () => {
   }
 
   return (
-    <MovieContainer>
+    <div>
       <ReturnButton />
       <MovieInfoContainer movie={movie} />
       <AdditionalInfo id={movie.id} />
       <Outlet />
-    </MovieContainer>
+    </div>
   );
 };
 

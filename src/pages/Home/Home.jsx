@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
+import TrendMovieItem from 'components/TrendMovieItem';
+
 import fetchTradingMovies from 'fetchRequests/fetchTradingMovies';
 
 import { HomeTitle, MovieList } from './Home.styled';
-
-import TrendMovieItem from 'components/TrendMovieItem/TrendMovieItem';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -19,7 +19,7 @@ const Home = () => {
           })),
         ]);
       })
-      .catch(error => console.log(error));
+      .catch(error => error);
   }, []);
 
   return (

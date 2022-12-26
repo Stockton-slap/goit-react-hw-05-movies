@@ -1,5 +1,6 @@
 import { List } from './MovieList.styled';
-import MovieItem from 'components/MovieItem/MovieItem';
+
+import MovieItem from 'components/MovieItem';
 
 const MovieList = ({ results }) => {
   return (

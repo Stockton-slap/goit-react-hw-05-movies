@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+
 import { Item, MovieLink } from './MovieItem.styled';
 
 const MovieItem = ({ result }) => {

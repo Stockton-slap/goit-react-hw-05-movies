@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import fetchMovieByKeyWord from 'fetchRequests/fetchMovieByKeyWord';
 import { useSearchParams } from 'react-router-dom';
-import MovieList from 'components/MovieList/MovieList';
-import Filter from 'components/Filter/Filter';
+
+import MovieList from 'components/MovieList';
+import Filter from 'components/Filter';
+import Notification from 'components/Notification';
+
+import fetchMovieByKeyWord from 'fetchRequests/fetchMovieByKeyWord';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,7 +44,7 @@ const Movies = () => {
         handleChange={handleChange}
         inputValue={inputValue}
       />
-      <MovieList results={results} />
+      {results.length < 1 ? <Notification /> : <MovieList results={results} />}
     </div>
   );
 };

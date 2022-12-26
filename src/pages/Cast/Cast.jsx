@@ -1,9 +1,11 @@
-import fetchMovieCast from 'fetchRequests/fetchMovieCast';
-import { CastList } from './Cast.styled';
-import CastItem from 'components/CastItem/CastItem';
-
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import CastItem from 'components/CastItem';
+
+import fetchMovieCast from 'fetchRequests/fetchMovieCast';
+
+import { CastList } from './Cast.styled';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -13,7 +15,7 @@ const Cast = () => {
   useEffect(() => {
     fetchMovieCast(movieId).then(({ cast }) => setCast(cast));
   }, [movieId]);
-  console.log(cast);
+
   return (
     <CastList>
       {cast.map(actor => {
