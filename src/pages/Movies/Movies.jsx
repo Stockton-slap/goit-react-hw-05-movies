@@ -13,6 +13,7 @@ const Movies = () => {
 
   const [inputValue, setInputValue] = useState(query || '');
   const [results, setResults] = useState([]);
+  const [noMatch, setNoMatch] = useState(false);
 
   useEffect(() => {
     if (!query) {
@@ -20,7 +21,11 @@ const Movies = () => {
     }
 
     fetchMovieByKeyWord(query).then(({ results }) => {
-      return setResults(results);
+      if (results.length === 0) {
+        setNoMatch(true);
+      }
+
+      setResults(results);
     });
   }, [query]);
 
@@ -30,6 +35,8 @@ const Movies = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    setNoMatch(false);
 
     if (inputValue === '') {
       setResults([]);
@@ -46,7 +53,7 @@ const Movies = () => {
         handleChange={handleChange}
         inputValue={inputValue}
       />
-      {results.length === 0 && <Notification />}
+      {noMatch && <Notification />}
       <MovieList results={results} />
     </div>
   );

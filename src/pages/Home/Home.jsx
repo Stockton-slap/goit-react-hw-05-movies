@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import TrendMovieItem from 'components/TrendMovieItem';
+import Loader from 'components/Loader';
 
 import fetchTradingMovies from 'fetchRequests/fetchTradingMovies';
 
@@ -21,6 +22,10 @@ const Home = () => {
       })
       .catch(error => error);
   }, []);
+
+  if (movies.length === 0) {
+    return <Loader />;
+  }
 
   return (
     <div>
