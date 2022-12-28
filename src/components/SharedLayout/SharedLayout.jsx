@@ -1,9 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 
-import Loader from 'components/Loader';
-
 import { Container, StyledNavLink } from './SharedLayout.styled';
+import Loader from 'components/Loader';
 
 const SharedLayout = () => {
   return (

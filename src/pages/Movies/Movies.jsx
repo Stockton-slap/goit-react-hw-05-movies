@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import MovieList from 'components/MovieList';
 import Filter from 'components/Filter';
 import Notification from 'components/Notification';
+import Loader from 'components/Loader';
 
 import fetchMovieByKeyWord from 'fetchRequests/fetchMovieByKeyWord';
 
@@ -14,19 +15,24 @@ const Movies = () => {
   const [inputValue, setInputValue] = useState(query || '');
   const [results, setResults] = useState([]);
   const [noMatch, setNoMatch] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!query) {
       return;
     }
+    setIsLoading(true);
 
-    fetchMovieByKeyWord(query).then(({ results }) => {
-      if (results.length === 0) {
-        setNoMatch(true);
-      }
+    fetchMovieByKeyWord(query)
+      .then(({ results }) => {
+        if (results.length === 0) {
+          setNoMatch(true);
+        }
 
-      setResults(results);
-    });
+        setResults(results);
+      })
+      .catch(error => error)
+      .finally(() => setIsLoading(false));
   }, [query]);
 
   const handleChange = e => {
@@ -53,8 +59,8 @@ const Movies = () => {
         handleChange={handleChange}
         inputValue={inputValue}
       />
+      {isLoading ? <Loader /> : <MovieList results={results} />}
       {noMatch && <Notification />}
-      <MovieList results={results} />
     </div>
   );
 };

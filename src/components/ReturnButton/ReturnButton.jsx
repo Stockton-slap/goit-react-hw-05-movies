@@ -1,18 +1,12 @@
-import { Link, useLocation } from 'react-router-dom';
-import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 import { Btn } from './ReturnButton.styled';
 
-const ReturnButton = () => {
-  const location = useLocation();
-
-  const returnPath = useMemo(() => location.state?.from || '/', []);
-
-  console.log(returnPath);
+const ReturnButton = ({ path }) => {
   return (
-    <Link to={returnPath} style={{ textDecoration: 'none' }}>
+    <Link to={path} style={{ textDecoration: 'none' }}>
       <Btn>
         <AiOutlineArrowLeft style={{ paddingRight: '5px' }} />
         Go back

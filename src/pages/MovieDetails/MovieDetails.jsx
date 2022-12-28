@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 
 import MovieInfoContainer from 'components/MovieInfoContainer';
 import AdditionalInfo from 'components/AdditionalInfo';
@@ -10,6 +10,8 @@ import fetchMovieById from 'fetchRequests/fetchMovieById';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
+
+  const location = useLocation();
 
   const { movieId } = useParams();
 
@@ -36,18 +38,20 @@ const MovieDetails = () => {
           });
         }
       )
-      .catch(error => error);
+      .catch(error => console.log(error));
   }, [movieId]);
 
   if (movie === null) {
     return <Loader />;
   }
 
+  const goBackPath = location.state?.from ?? '/movies';
+
   return (
     <div>
-      <ReturnButton />
+      <ReturnButton path={goBackPath} />
       <MovieInfoContainer movie={movie} />
-      <AdditionalInfo id={movie.id} />
+      <AdditionalInfo id={movie.id} path={goBackPath} />
       <Outlet />
     </div>
   );
